@@ -42,45 +42,93 @@ h2, h3 {
   margin-bottom: 2rem;
 }
 
-/* Estilos para los campos de formulario - Azules claros */
+/* Estilos completos para campos de formulario - Azules claros */
+::ng-deep .mat-form-field {
+  color: #1565c0 !important;
+}
+
+::ng-deep .mat-form-field-label {
+  color: #1565c0 !important;
+}
+
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
   color: #1565c0 !important;
 }
-::ng-deep .mat-form-field.mat-focused .mat-form-field-underline {
-  background-color: #1565c0 !important;
-}
-::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
-  background-color: #1565c0 !important;
-}
-::ng-deep .mat-form-field .mat-form-field-label {
-  color: #1565c0 !important;
-}
+
 ::ng-deep .mat-form-field .mat-form-field-underline {
   background-color: #bbdefb !important;
 }
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-underline {
+  background-color: #1565c0 !important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: #1565c0 !important;
+}
+
 ::ng-deep .mat-form-field .mat-input-element {
   color: #1565c0 !important;
 }
-::ng-deep .mat-form-field.mat-focused .mat-form-field-outline {
+
+::ng-deep .mat-form-field.mat-focused .mat-input-element {
   color: #1565c0 !important;
 }
-::ng-deep .mat-form-field .mat-form-field-outline {
-  color: #bbdefb !important;
-}
-::ng-deep .mat-form-field.mat-focused .mat-form-field-outline-thick {
-  color: #1565c0 !important;
-}
+
+/* Estilos para campos con outline */
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
   color: #bbdefb !important;
 }
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline {
+  color: #1565c0 !important;
+}
+
 ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
   color: #1565c0 !important;
 }
+
+/* Estilos para campos con fill */
 ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
   background-color: #f8fbff !important;
+  border-radius: 4px;
 }
+
 ::ng-deep .mat-form-field-appearance-fill.mat-focused .mat-form-field-flex {
   background-color: #f8fbff !important;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-underline {
+  background-color: #bbdefb !important;
+}
+
+::ng-deep .mat-form-field-appearance-fill.mat-focused .mat-form-field-underline {
+  background-color: #1565c0 !important;
+}
+
+/* Estilos para el placeholder */
+::ng-deep .mat-form-field .mat-input-element::placeholder {
+  color: #90caf9 !important;
+}
+
+/* Estilos para el hint */
+::ng-deep .mat-form-field .mat-hint {
+  color: #90caf9 !important;
+}
+
+/* Estilos para el error */
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: #f44336 !important;
+}
+
+::ng-deep .mat-form-field.mat-form-field-invalid .mat-form-field-underline {
+  background-color: #f44336 !important;
+}
+
+/* Estilos para el suffix/prefix */
+::ng-deep .mat-form-field .mat-form-field-suffix,
+::ng-deep .mat-form-field .mat-form-field-prefix {
+  color: #1565c0 !important;
 }
 
 .history-loading {
