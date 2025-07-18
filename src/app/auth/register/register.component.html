@@ -1,0 +1,24 @@
+<mat-card>
+  <h2>Registro</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Usuario</mat-label>
+      <input matInput formControlName="username" autocomplete="username" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" autocomplete="email" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" formControlName="password" autocomplete="new-password" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="loading || !registerForm.valid">
+      <mat-progress-spinner *ngIf="loading" diameter="20" mode="indeterminate"></mat-progress-spinner>
+      <span *ngIf="!loading">Registrarse</span>
+    </button>
+  </form>
+  <div class="login-link">
+    ¿Ya tienes cuenta? <a routerLink="/auth/login">Inicia sesión aquí</a>
+  </div>
+</mat-card> 

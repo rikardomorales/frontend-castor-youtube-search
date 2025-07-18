@@ -1,0 +1,11 @@
+.mat-toolbar {
+  background: linear-gradient(90deg, #ffd6d6 0%, #ffe5ec 50%, #ffe5d9 100%);
+  color: #b71c1c;
+}
+.spacer {
+  flex: 1 1 auto;
+}
+button[mat-button] {
+  color: #b71c1c;
+  font-weight: 500;
+}
