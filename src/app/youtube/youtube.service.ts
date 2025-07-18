@@ -2,6 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface SearchHistory {
+  id: number;
+  user: {
+    id: number;
+    username: string;
+    email: string;
+  };
+  query: string;
+  videoId: string;
+  searchedAt: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class YouTubeService {
   private apiUrl = 'http://localhost:8080/api/youtube';
@@ -11,5 +23,9 @@ export class YouTubeService {
   searchVideos(data: { query: string; maxResults: number }): Observable<any> {
     const params = { q: data.query, maxResults: data.maxResults };
     return this.http.get<any>(`${this.apiUrl}/search`, { params });
+  }
+
+  getSearchHistory(): Observable<SearchHistory[]> {
+    return this.http.get<SearchHistory[]>(`${this.apiUrl}/history`);
   }
 } 
