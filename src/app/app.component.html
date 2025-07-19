@@ -1,8 +1,25 @@
-<mat-toolbar color="primary">
-  <span>Castor Buscador de YouTube</span>
+<mat-toolbar color="primary" [@toolbarAnimation]>
+  <span class="logo">Castor Buscador de YouTube</span>
   <span class="spacer"></span>
-  <button mat-button routerLink="/auth/login">Iniciar sesión</button>
-  <button mat-button routerLink="/auth/register">Registrarse</button>
-  <button mat-button routerLink="/youtube" *ngIf="isAuthenticated()">Buscar</button>
+  <div class="nav-buttons">
+    <button mat-button routerLink="/auth/login" *ngIf="!isAuthenticated" class="nav-btn">
+      <mat-icon>login</mat-icon>
+      Iniciar sesión
+    </button>
+    <button mat-button routerLink="/auth/register" *ngIf="!isAuthenticated" class="nav-btn">
+      <mat-icon>person_add</mat-icon>
+      Registrarse
+    </button>
+    <button mat-button routerLink="/youtube" *ngIf="isAuthenticated" class="nav-btn">
+      <mat-icon>search</mat-icon>
+      Buscar
+    </button>
+    <button mat-button (click)="logout()" *ngIf="isAuthenticated" class="nav-btn logout-btn">
+      <mat-icon>logout</mat-icon>
+      Cerrar sesión
+    </button>
+  </div>
 </mat-toolbar>
-<router-outlet></router-outlet>
+<div [@pageTransition]>
+  <router-outlet></router-outlet>
+</div>
