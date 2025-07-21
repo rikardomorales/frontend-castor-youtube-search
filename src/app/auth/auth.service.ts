@@ -22,7 +22,9 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   register(request: AuthRequest): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, request);
+    return this.http.post(`${this.apiUrl}/register`, request, { 
+      responseType: 'text'
+    });
   }
 
   login(request: AuthRequest): Observable<AuthResponse> {

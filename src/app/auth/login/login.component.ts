@@ -56,12 +56,22 @@ export class LoginComponent {
           this.authService.setToken(response.token);
           this.snackBar.open('¡Bienvenido! Has iniciado sesión.', 'Cerrar', { duration: 2500 });
           this.router.navigate(['/youtube']);
-        },
-        error: (err) => {
-          this.snackBar.open(err.error.message || 'Usuario o contraseña incorrectos. Intenta de nuevo.', 'Cerrar', { duration: 3000 });
           this.loading = false;
         },
-        complete: () => this.loading = false
+        error: (err) => {
+          let errorMessage = 'Usuario o contraseña incorrectos. Intenta de nuevo.';
+          
+          if (err.error && typeof err.error === 'string') {
+            errorMessage = err.error;
+          } else if (err.error && err.error.message) {
+            errorMessage = err.error.message;
+          } else if (err.message) {
+            errorMessage = err.message;
+          }
+          
+          this.snackBar.open(errorMessage, 'Cerrar', { duration: 3000 });
+          this.loading = false;
+        }
       });
     }
   }

@@ -33,8 +33,8 @@ export class YouTubeSearchComponent implements OnInit {
   loadSearchHistory() {
     this.loadingHistory = true;
     this.youTubeService.getSearchHistory().subscribe({
-      next: (history) => {
-        this.searchHistory = history;
+      next: (response) => {
+        this.searchHistory = response.data;
         this.loadingHistory = false;
       },
       error: (err) => {
@@ -49,7 +49,7 @@ export class YouTubeSearchComponent implements OnInit {
       this.loading = true;
       this.youTubeService.searchVideos(this.searchForm.value).subscribe({
         next: (response) => {
-          this.searchResults = response.results;
+          this.searchResults = response.data;
           if (this.searchResults.length === 0) {
             this.snackBar.open('No se encontraron videos para tu búsqueda.', 'Cerrar', { duration: 2500 });
           }

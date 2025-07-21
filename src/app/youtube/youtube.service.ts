@@ -14,18 +14,52 @@ export interface SearchHistory {
   searchedAt: string;
 }
 
+export interface Video {
+  id: string;
+  title: string;
+  description: string;
+  thumbnailUrl: string;
+  channelTitle: string;
+  publishedAt: string;
+  viewCount: string;
+}
+
+export interface Channel {
+  id: string;
+  title: string;
+  description: string;
+  thumbnailUrl: string;
+  subscriberCount: string;
+  videoCount: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class YouTubeService {
-  private apiUrl = 'http://localhost:8080/api/youtube';
+  private apiUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {}
 
   searchVideos(data: { query: string; maxResults: number }): Observable<any> {
     const params = { q: data.query, maxResults: data.maxResults };
-    return this.http.get<any>(`${this.apiUrl}/search`, { params });
+    return this.http.get<any>(`${this.apiUrl}/search/videos`, { params });
   }
 
-  getSearchHistory(): Observable<SearchHistory[]> {
-    return this.http.get<SearchHistory[]>(`${this.apiUrl}/history`);
+  /**
+   * Llama al endpoint de test del backend.
+   */
+  testSearch(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/search/test`);
+  }
+
+  getSearchHistory(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/history/search`);
+  }
+
+  playVideo(videoId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/videos/${videoId}/play`);
+  }
+
+  getChannel(channelId: string): Observable<Channel> {
+    return this.http.get<Channel>(`${this.apiUrl}/channels/${channelId}`);
   }
 } 

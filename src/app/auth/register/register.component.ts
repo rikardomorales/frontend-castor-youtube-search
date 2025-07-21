@@ -29,16 +29,27 @@ export class RegisterComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       this.loading = true;
+      
       this.authService.register(this.registerForm.value).subscribe({
-        next: () => {
-          this.snackBar.open('¡Registro exitoso! Ahora puedes iniciar sesión.', 'Cerrar', { duration: 2500 });
+        next: (response) => {
+          this.snackBar.open('¡Usuario registrado exitosamente! Por favor inicia sesión para continuar.', 'Cerrar', { duration: 3000 });
           this.router.navigate(['/auth/login']);
-        },
-        error: (err) => {
-          this.snackBar.open(err.error.message || 'No se pudo registrar. Intenta de nuevo.', 'Cerrar', { duration: 3000 });
           this.loading = false;
         },
-        complete: () => this.loading = false
+        error: (err) => {
+          let errorMessage = 'No se pudo registrar. Intenta de nuevo.';
+          
+          if (err.error && typeof err.error === 'string') {
+            errorMessage = err.error;
+          } else if (err.error && err.error.message) {
+            errorMessage = err.error.message;
+          } else if (err.message) {
+            errorMessage = err.message;
+          }
+          
+          this.snackBar.open(errorMessage, 'Cerrar', { duration: 3000 });
+          this.loading = false;
+        }
       });
     }
   }

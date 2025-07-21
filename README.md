@@ -86,7 +86,7 @@ Crear archivo `src/environments/environment.ts`:
 ```typescript
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000/api' // URL del backend
+  apiUrl: 'http://localhost:8080/api' // URL del backend
 };
 ```
 
@@ -100,7 +100,7 @@ export const environment = {
 
 ### Animaciones
 - **Transiciones de página**: Efectos suaves entre rutas
-- **Animaciones de entrada**: Stagger para elementos
+- **Animaciones de entrada**: Stagger para elementos y tarjetas de login
 - **Efectos hover**: Interacciones responsivas
 - **Partículas flotantes**: Elementos decorativos
 
@@ -108,7 +108,7 @@ export const environment = {
 - **Barra de navegación**: Iconos y efectos hover
 - **Formularios**: Campos con iconos y validación visual
 - **Tarjetas de resultados**: Diseño moderno con thumbnails
-- **Historial de búsquedas**: Columna independiente
+- **Historial de búsquedas**: Columna independiente y clickeable
 
 ## 📱 Funcionalidades Detalladas
 
@@ -119,17 +119,28 @@ loginForm: FormGroup = this.fb.group({
   username: ['', Validators.required],
   password: ['', Validators.required]
 });
+
+// Registro con validación
+registerForm: FormGroup = this.fb.group({
+  username: ['', Validators.required],
+  password: ['', Validators.required],
+  email: ['', [Validators.required, Validators.email]]
+});
 ```
+- El login requiere usuario y contraseña.
+- El registro requiere usuario, email y contraseña.
+- Feedback visual con snackbars y spinners de carga.
 
 ### Búsqueda de Videos
 ```typescript
 // Parámetros de búsqueda
-searchParams = {
-  query: string,
-  maxResults: number,
-  order: 'relevance' | 'date' | 'rating'
-};
+searchForm: FormGroup = this.fb.group({
+  query: ['', Validators.required],
+  maxResults: [10, [Validators.required, Validators.min(1), Validators.max(50)]]
+});
 ```
+- El historial se obtiene de `/api/history/search`.
+- Al hacer clic en un elemento del historial, se rellena el formulario de búsqueda.
 
 ### Historial de Búsquedas
 - Persistencia en backend
@@ -146,8 +157,12 @@ POST /api/auth/login
 POST /api/auth/register
 
 // YouTube Search
-GET /api/youtube/search?query=...&maxResults=...
-GET /api/youtube/history
+GET /api/search/videos?q=...&maxResults=...
+GET /api/history/search
+
+// Otros
+GET /api/videos/:videoId/play
+GET /api/channels/:channelId
 ```
 
 ### CORS Configuration
